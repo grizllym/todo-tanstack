@@ -67,7 +67,7 @@ function RouteComponent() {
   }
 
   return (
-    <Container>
+    <Container px="0">
       <Stack>
         <Group>
           <TextInput
