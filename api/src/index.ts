@@ -80,8 +80,6 @@ app.delete('/api/v1/todos/:id',
   }
 )
 
-console.log(process.env.USER_PORT);
-
 serve({
   fetch: app.fetch,
   port: 3000

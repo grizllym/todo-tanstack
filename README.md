@@ -1,4 +1,4 @@
-# To do List
+# Todo List
 
 This app and repository are a technical showcase built with the technologies listed below.
 
@@ -12,7 +12,7 @@ Backend: [Hono](https://hono.dev/), [Zod](https://zod.dev/)
 ## 🗂️ Project Structure
 ```
 /api - be
-/app - fe
+/web - fe
 README.md
 ```
 
@@ -22,9 +22,18 @@ This project requires [Node.js](https://nodejs.org/en/) version 18+ or 20+.
 # 1. Clone repo
 
 # 2. Install dependencies
-npm run i
+cd api
+npm i
 
-# 3. Run development
+cd web
+npm i
+
+# 3. Run development BE
+cd api
+npm run dev
+
+# 4. Run development FE
+cd web
 npm run dev
 ```
 
