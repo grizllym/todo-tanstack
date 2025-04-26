@@ -7,12 +7,12 @@ import { createFileRoute } from '@tanstack/react-router'
 import { useRef } from 'react'
 import ToDo from 'src/components/ToDo'
 import { ToDoType } from 'src/types/ToDo'
-import api from 'src/utils/api'
+import fetcher from 'src/utils/fetcher'
 
 
 const todosQueryOptions = queryOptions({
   queryKey: ['todos'],
-  queryFn: () => api.list(),
+  queryFn: () => fetcher<ToDoType[]>('GET /api/v1/todos'),
 })
 
 
@@ -27,19 +27,19 @@ function RouteComponent() {
   const dataQuery = useQuery(todosQueryOptions)
 
   const insertMutation = useMutation({
-    mutationFn: (data: Omit<ToDoType, 'id' | 'createdAt' | 'isDone'>) => api.insert(data),
+    mutationFn: (body: Omit<ToDoType, 'id' | 'createdAt' | 'isDone'>) => fetcher('POST /api/v1/todos', { body }),
     onSuccess: () => dataQuery.refetch()
   })
   const renameMutation = useMutation({
-    mutationFn: (data: ToDoType) => api.rename(data),
+    mutationFn: (body: ToDoType) => fetcher(`PATCH /api/v1/todos/${body.id}/rename`, { body }),
     onSuccess: () => dataQuery.refetch()
   })
   const toggleMutation = useMutation({
-    mutationFn: async (data: ToDoType) => api.toggle(data),
+    mutationFn: async (id: string) => fetcher(`PATCH /api/v1/todos/${id}/toggle`),
     onSuccess: () => dataQuery.refetch(),
   })
   const removeMutation = useMutation({
-    mutationFn: (id: string) => api.remove(id),
+    mutationFn: (id: string) => fetcher(`DELETE /api/v1/todos/${id}`),
     onSuccess: () => dataQuery.refetch()
   })
 
@@ -90,7 +90,7 @@ function RouteComponent() {
               key={todo.id}
               data={todo}
               onRename={renameMutation.mutate}
-              onToggle={toggleMutation.mutate}
+              onToggle={() => toggleMutation.mutate(todo.id)}
               onRemove={handleRemove}
             />
           ))

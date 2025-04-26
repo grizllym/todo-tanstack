@@ -1,0 +1,29 @@
+### 
+GET http://localhost:3000/
+
+### List
+GET http://localhost:3000/api/v1/todos
+
+### Create
+POST http://localhost:3000/api/v1/todos
+Content-Type: application/json
+
+{
+	"text": "test"
+}
+
+### Create Error
+POST http://localhost:3000/api/v1/todos
+Content-Type: application/json
+
+{
+	"teXt": "test"
+}
+
+### Rename
+POST http://localhost:3000/api/v1/todos/:id/rename
+Content-Type: application/json
+
+{
+	"text": "test"
+}

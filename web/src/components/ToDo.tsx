@@ -8,7 +8,7 @@ import dayjs from "dayjs"
 type TodoProps = {
 	data: ToDoType;
 	onRename: (newTodo: ToDoType) => void;
-	onToggle: (newTodo: ToDoType) => void;
+	onToggle: () => void;
 	onRemove: (id: string) => void;
 }
 
@@ -27,15 +27,10 @@ export default function ToDo({ data, onRename, onToggle, onRemove }: TodoProps) 
 
 	const inputRef = useClickOutside(() => handleSubmit())
 
-	function handleToggle(e: React.ChangeEvent<HTMLInputElement>) {
-		const isDone = e.currentTarget.checked
-		const newTodo = { ...data, isDone }
-		onToggle(newTodo)
-	}
 
 	return (
 		<Group>
-			<Checkbox checked={data.isDone} onChange={handleToggle} />
+			<Checkbox checked={data.isDone} onChange={() => onToggle()} />
 			<Stack gap={0} className="flex-1">
 				{ !isEditing && <Text>{ data.text }</Text> }
 				{

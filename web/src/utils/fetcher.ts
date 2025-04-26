@@ -18,13 +18,18 @@ type Method = 'GET' | 'POST' | 'PUT' | 'PATCH' | 'DELETE';
 type Resource = `${Method} /${string}`
 
 // TODO - not tested yet
-export default async function fetcher<T>(resource: Resource, options: Omit<RequestInit, 'method' | 'credentials'>) {
+export default async function fetcher<T>(resource: Resource, options?: Omit<RequestInit, 'method' | 'credentials' | 'body'> & { body?: unknown }) {
 	const [ method, url ] = resource.split(' ')
+	const body = options?.body ? JSON.stringify(options.body) : undefined
 	try {
 		const response = await fetch(url, {
 			...options,
 			credentials: 'include',
+			headers: {
+				'Content-Type': "application/json"
+			},
 			method,
+			body
 		})
 		if (!response.ok) {
 			throw new FetchError(response)

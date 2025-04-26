@@ -16,5 +16,16 @@ export default defineConfig({
     alias: {
       '@tabler/icons-react': '@tabler/icons-react/dist/esm/icons/index.mjs', // TODO Temporary Workaround https://github.com/tabler/tabler-icons/issues/1233
     },
+  },
+  server: {
+    proxy: {
+      '/api': {
+        target: 'http://localhost:3000',
+        secure: false,
+        cookieDomainRewrite: {
+          '*': 'localhost:3000'
+        }
+      }
+    }
   }
 })
