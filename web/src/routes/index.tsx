@@ -12,7 +12,7 @@ import fetcher from 'src/utils/fetcher'
 
 const todosQueryOptions = queryOptions({
   queryKey: ['todos'],
-  queryFn: () => fetcher<ToDoType[]>('GET /api/v1/todos'),
+  queryFn: () => fetcher<ToDoType[]>('GET /api/v1/todos?limit=1000'),
 })
 
 

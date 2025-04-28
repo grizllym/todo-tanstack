@@ -21,7 +21,7 @@ Content-Type: application/json
 }
 
 ### Rename
-POST http://localhost:3000/api/v1/todos/:id/rename
+PATCH http://localhost:3000/api/v1/todos/100/rename
 Content-Type: application/json
 
 {
