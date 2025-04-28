@@ -17,7 +17,7 @@ README.md
 ```
 
 ## 🏁 Quick Start
-This project requires [Node.js](https://nodejs.org/en/) version 18+ or 20+.
+This project requires [Node.js](https://nodejs.org/en/) version 18+ or 20+. Or use `quick-setup.sh` and then run development servers.
 ```bash
 # 1. Clone repo
 
@@ -30,7 +30,7 @@ npm i
 # 2.2 Create environment
 cp .env.example .env
 
-# 2.3 Db Migration
+# 2.3 DB Migration
 npx drizzle-kit migrate
 
 # 2.4 Run development
